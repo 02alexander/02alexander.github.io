@@ -13,7 +13,7 @@ function localGame() {
 	stack4.renderLines();
 
 	stack4.renderBoard();
-	//stack4.highlightAccecpableMoves();
+	stack4.highlightAccecpableMoves();
 
 	window.addEventListener('mousedown', function(e) {
 
@@ -62,16 +62,15 @@ function localGame() {
 			gameIsOver = true;
 		}
 
-		//stack4.highlightAccecpableMoves();
+		stack4.highlightAccecpableMoves();
+		stack4.showWhoseTurn();
 	});
 
 }
 
 var gameArea = {
-	canvas: document.createElement("canvas"),
+	canvas: document.body.getElementsByTagName("canvas")[0],
 	start: function() {
-		this.canvas.width = 480;
-		this.canvas.height = 480;
 		this.context = this.canvas.getContext("2d");
 		document.body.insertBefore(this.canvas, document.body.childNodes[0]);
 	},
@@ -176,7 +175,7 @@ var stack4 = {
 						height -= lineThicknes;
 					}
 					let ctx = gameArea.context;
-					ctx.fillStyle = "green";
+					ctx.fillStyle = "rgb(220,220,220)";
 					ctx.fillRect(xCord*(gameArea.canvas.width/9)+lineThicknes,
 								 yCord*(gameArea.canvas.height/9)+lineThicknes,
 								 width,
@@ -190,6 +189,16 @@ var stack4 = {
 			this.board[x][y] = this.whoseTurn;
 			this.whoseTurn = !(this.whoseTurn-1)+1;
 		}
+	},
+	showWhoseTurn: function() {
+		let img;
+		if (this.whoseTurn == 1) {
+			img = ring;
+		} else {
+			img = kryss;
+		}
+		let wind = document.body.getElementsByTagName("img")[0];
+		wind.setAttribute("src", img.src);
 	},
 	hasWon: function(player) {
 		let directions = [[0,1], [1,1], [1,0], [-1,1]];
