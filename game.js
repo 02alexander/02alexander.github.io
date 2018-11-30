@@ -92,11 +92,11 @@ var stack4 = {
 		ctx = gameArea.context;
 		ctx.fillStyle = "black";
 
-		for (let i = 0; i < 9; ++i) {
-			ctx.fillRect(0, i*(gameArea.canvas.height/9), gameArea.canvas.width, lineThicknes);
+		for (let i = 0; i < 8; ++i) {
+			ctx.fillRect(0, i*(gameArea.canvas.height/8), gameArea.canvas.width, lineThicknes);
 		}
-		for (let i = 0; i < 9; ++i) {
-			ctx.fillRect(i*(gameArea.canvas.width/9), 0, lineThicknes, gameArea.canvas.height);
+		for (let i = 0; i < 8; ++i) {
+			ctx.fillRect(i*(gameArea.canvas.width/8), 0, lineThicknes, gameArea.canvas.height);
 		}
 		ctx.fillRect(gameArea.canvas.width-lineThicknes,0,lineThicknes,gameArea.canvas.height);
 		ctx.fillRect(0,gameArea.canvas.height-lineThicknes,gameArea.canvas.width,lineThicknes);
@@ -105,16 +105,16 @@ var stack4 = {
 	start: function() {
 		this.board = [];
 		this.whoseTurn = 2;
-		for (let i = 0; i < 9; ++i) {
+		for (let i = 0; i < 8; ++i) {
 			this.board.push([])
-			for (let j = 0; j < 9; ++j) {
+			for (let j = 0; j < 8; ++j) {
 				this.board[i].push(0);
 			}
 		}
 	},
 	renderBoard: function() {
-		for (let xCord = 0; xCord < 9; ++xCord) {
-			for (let yCord = 0; yCord < 9; ++yCord) {
+		for (let xCord = 0; xCord < 8; ++xCord) {
+			for (let yCord = 0; yCord < 8; ++yCord) {
 				let img;
 				if (this.board[xCord][yCord] === 1) {
 					img = ring;
@@ -134,12 +134,12 @@ var stack4 = {
 			return false;
 		}
 		return isArrayEqual(this.dropResult(0,y,1,0),[x,y]) || 
-			   isArrayEqual(this.dropResult(8,y,-1,0),[x,y]) || 
+			   isArrayEqual(this.dropResult(7,y,-1,0),[x,y]) || 
 			   isArrayEqual(this.dropResult(x,0,0,1),[x,y]) || 
-			   isArrayEqual(this.dropResult(x,8,0,-1),[x,y]);
+			   isArrayEqual(this.dropResult(x,7,0,-1),[x,y]);
 	},
 	dropResult: function(x, y, deltax, deltay) {
-		for (let i = 0; i < 9; ++i) {
+		for (let i = 0; i < 8; ++i) {
 			if (this.board[x+deltax*i][y+deltay*i] === 0) {
 				return [x+deltax*i, y+deltay*i];
 			}
@@ -147,36 +147,36 @@ var stack4 = {
 		return null;
 	},
 	getRect: function(xCord, yCord) {
-		let width = gameArea.canvas.width/9-lineThicknes;
-		let height = gameArea.canvas.height/9-lineThicknes;
-		if (xCord === 8) {
+		let width = gameArea.canvas.width/8-lineThicknes;
+		let height = gameArea.canvas.height/8-lineThicknes;
+		if (xCord === 7) {
 			width -= lineThicknes;
 		}
-		if (yCord === 8) {
+		if (yCord === 7) {
 			height -= lineThicknes;
 		}
-		return { x: xCord*(gameArea.canvas.width/9)+lineThicknes, 
-				 y: yCord*(gameArea.canvas.height/9)+lineThicknes,
+		return { x: xCord*(gameArea.canvas.width/8)+lineThicknes, 
+				 y: yCord*(gameArea.canvas.height/8)+lineThicknes,
 				 w: width,
 				 h: height };
 	},
 
 	highlightAccecpableMoves: function() {
-		for (let xCord = 0; xCord < 9; ++xCord) {
-			for (let yCord = 0; yCord < 9; ++yCord) {
+		for (let xCord = 0; xCord < 8; ++xCord) {
+			for (let yCord = 0; yCord < 8; ++yCord) {
 				if (this.isAcceptableMove(xCord, yCord)) {
-					let width = gameArea.canvas.width/9-lineThicknes;
-					if (xCord == 8) {
+					let width = gameArea.canvas.width/8-lineThicknes;
+					if (xCord == 7) {
 						width -= lineThicknes;
 					}
-					let height = gameArea.canvas.height/9-lineThicknes;
-					if (yCord == 8) {
+					let height = gameArea.canvas.height/8-lineThicknes;
+					if (yCord == 7) {
 						height -= lineThicknes;
 					}
 					let ctx = gameArea.context;
 					ctx.fillStyle = "rgb(220,220,220)";
-					ctx.fillRect(xCord*(gameArea.canvas.width/9)+lineThicknes,
-								 yCord*(gameArea.canvas.height/9)+lineThicknes,
+					ctx.fillRect(xCord*(gameArea.canvas.width/8)+lineThicknes,
+								 yCord*(gameArea.canvas.height/8)+lineThicknes,
 								 width,
 								 height);
 					}
@@ -201,12 +201,12 @@ var stack4 = {
 	},
 	hasWon: function(player) {
 		let directions = [[0,1], [1,1], [1,0], [-1,1]];
-		for (let x = 0; x < 9; ++x) {
-			for (let y = 0; y < 9; ++y) {
+		for (let x = 0; x < 8; ++x) {
+			for (let y = 0; y < 8; ++y) {
 				for (let dir = 0; dir < 4; ++dir) {
 					let isBroken = false;
 					for (var c = 0; c < 4; ++c) {
-						if (!(x+c*directions[dir][0]>=0 && x+c*directions[dir][0]<9 && y+c*directions[dir][1]>=0 && y+c*directions[dir][1]<9)) {
+						if (!(x+c*directions[dir][0]>=0 && x+c*directions[dir][0]<8 && y+c*directions[dir][1]>=0 && y+c*directions[dir][1]<8)) {
 							isBroken = true;
 							continue;
 						}
