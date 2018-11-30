@@ -24,8 +24,8 @@ function localGame() {
 		let rect = gameArea.canvas.getBoundingClientRect();
 		let x = e.clientX - rect.left;
 		let y = e.clientY - rect.top;
-		let boardCordx = Math.floor(x / (gameArea.canvas.width/9));
-		let boardCordy = Math.floor(y / (gameArea.canvas.height/9));
+		let boardCordx = Math.floor(x / (gameArea.canvas.width/8));
+		let boardCordy = Math.floor(y / (gameArea.canvas.height/8));
 		console.log(boardCordx);
 		console.log(boardCordy);
 		console.log("\n");
