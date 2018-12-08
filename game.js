@@ -37,32 +37,30 @@ function localGame() {
 		stack4.renderBoard();
 		let wn = stack4.hasWon(1);
 		if (wn[0]) {
-			console.log("\nring");
-			console.log("start (" + wn[1] + ", " + wn[2] + ")");
-			console.log("end (" + wn[3] + ", " + wn[4] + ")");
-			let start = stack4.getRect(wn[1], wn[2]);
-			let startx = start.x + start.w/2;
-			let starty = start.y + start.h/2;
+			for (let i = 0; i < wn[1].length; i+=2) {
+				let start = stack4.getRect(wn[1][i], wn[1][i+1]);
+				let startx = start.x + start.w/2;
+				let starty = start.y + start.h/2;
 
-			let end = stack4.getRect(wn[3], wn[4]);
-			let endx = end.x + end.w/2;
-			let endy = end.y + end.h/2;
-			gameArea.drawLine(startx, starty, endx, endy, "green");
+				let end = stack4.getRect(wn[2][i], wn[2][i+1]);
+				let endx = end.x + end.w/2;
+				let endy = end.y + end.h/2;
+				gameArea.drawLine(startx, starty, endx, endy, "green");
+			}
 			gameIsOver = true;
 		}
 		wn = stack4.hasWon(2);
 		if (wn[0]) {
-			console.log("\nkryss");
-			console.log("start (" + wn[1] + ", " + wn[2] + ")");
-			console.log("end (" + wn[3] + ", " + wn[4] + ")");
-			let start = stack4.getRect(wn[1], wn[2]);
-			let startx = start.x + start.w/2;
-			let starty = start.y + start.h/2;
+			for (let i = 0; i < wn[1].length; i+=2) {
+				let start = stack4.getRect(wn[1][i], wn[1][i+1]);
+				let startx = start.x + start.w/2;
+				let starty = start.y + start.h/2;
 
-			let end = stack4.getRect(wn[3], wn[4]);
-			let endx = end.x + end.w/2;
-			let endy = end.y + end.h/2;
-			gameArea.drawLine(startx, starty, endx, endy, "green");
+				let end = stack4.getRect(wn[2][i], wn[2][i+1]);
+				let endx = end.x + end.w/2;
+				let endy = end.y + end.h/2;
+				gameArea.drawLine(startx, starty, endx, endy, "green");
+			}
 			gameIsOver = true;
 		}
 
@@ -205,6 +203,7 @@ var stack4 = {
 	},
 	hasWon: function(player) {
 		let directions = [[0,1], [1,1], [1,0], [-1,1]];
+		let winningLines = [[],[]]
 		for (let x = 0; x < 8; ++x) {
 			for (let y = 0; y < 8; ++y) {
 				for (let dir = 0; dir < 4; ++dir) {
@@ -219,12 +218,15 @@ var stack4 = {
 						}
 					}
 					if (isBroken === false) {
-						return [true, x, y, x+(c-1)*directions[dir][0],y+(c-1)*directions[dir][1]];
+						winningLines[0].push(x);
+						winningLines[0].push(y);
+						winningLines[1].push(x+(c-1)*directions[dir][0]);
+						winningLines[1].push(y+(c-1)*directions[dir][1]);
 					}
 				}
 			}
 		}
-		return [false, null, null];
+		return [winningLines[0].length!=0, winningLines[0], winningLines[1]];
 	}
 }
 
