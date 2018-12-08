@@ -9,11 +9,11 @@ var gameIsOver = false;
 
 function localGame() {
 	gameArea.start();
-	stack4.start();
-	stack4.renderLines();
+	stack4x4.start();
+	stack4x4.renderLines();
 
-	stack4.renderBoard();
-	stack4.highlightAccecpableMoves();
+	stack4x4.renderBoard();
+	stack4x4.highlightAccecpableMoves();
 
 	console.log(gameArea.canvas.width);
 	console.log(gameArea.canvas.height);
@@ -33,30 +33,30 @@ function localGame() {
 		console.log(boardCordx);
 		console.log(boardCordy);
 		console.log("\n");
-		stack4.placePiece(boardCordx,boardCordy);
-		stack4.renderBoard();
-		let wn = stack4.hasWon(1);
+		stack4x4.placePiece(boardCordx,boardCordy);
+		stack4x4.renderBoard();
+		let wn = stack4x4.hasWon(1);
 		if (wn[0]) {
 			for (let i = 0; i < wn[1].length; i+=2) {
-				let start = stack4.getRect(wn[1][i], wn[1][i+1]);
+				let start = stack4x4.getRect(wn[1][i], wn[1][i+1]);
 				let startx = start.x + start.w/2;
 				let starty = start.y + start.h/2;
 
-				let end = stack4.getRect(wn[2][i], wn[2][i+1]);
+				let end = stack4x4.getRect(wn[2][i], wn[2][i+1]);
 				let endx = end.x + end.w/2;
 				let endy = end.y + end.h/2;
 				gameArea.drawLine(startx, starty, endx, endy, "green");
 			}
 			gameIsOver = true;
 		}
-		wn = stack4.hasWon(2);
+		wn = stack4x4.hasWon(2);
 		if (wn[0]) {
 			for (let i = 0; i < wn[1].length; i+=2) {
-				let start = stack4.getRect(wn[1][i], wn[1][i+1]);
+				let start = stack4x4.getRect(wn[1][i], wn[1][i+1]);
 				let startx = start.x + start.w/2;
 				let starty = start.y + start.h/2;
 
-				let end = stack4.getRect(wn[2][i], wn[2][i+1]);
+				let end = stack4x4.getRect(wn[2][i], wn[2][i+1]);
 				let endx = end.x + end.w/2;
 				let endy = end.y + end.h/2;
 				gameArea.drawLine(startx, starty, endx, endy, "green");
@@ -64,8 +64,8 @@ function localGame() {
 			gameIsOver = true;
 		}
 
-		stack4.highlightAccecpableMoves();
-		stack4.showWhoseTurn();
+		stack4x4.highlightAccecpableMoves();
+		stack4x4.showWhoseTurn();
 	});
 
 }
@@ -89,7 +89,7 @@ var gameArea = {
 	}
 }
 
-var stack4 = {
+var stack4x4 = {
 	renderLines: function() {
 		ctx = gameArea.context;
 		ctx.fillStyle = "black";
