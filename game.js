@@ -15,6 +15,9 @@ function localGame() {
 	stack4.renderBoard();
 	stack4.highlightAccecpableMoves();
 
+	console.log(gameArea.canvas.width);
+	console.log(gameArea.canvas.height);
+
 	window.addEventListener('mousedown', function(e) {
 
 		if (gameIsOver) {
@@ -24,6 +27,7 @@ function localGame() {
 		let rect = gameArea.canvas.getBoundingClientRect();
 		let x = e.clientX - rect.left;
 		let y = e.clientY - rect.top;
+		console.log(x + ", " + y)
 		let boardCordx = Math.floor(x / (gameArea.canvas.width/8));
 		let boardCordy = Math.floor(y / (gameArea.canvas.height/8));
 		console.log(boardCordx);
@@ -43,7 +47,7 @@ function localGame() {
 			let end = stack4.getRect(wn[3], wn[4]);
 			let endx = end.x + end.w/2;
 			let endy = end.y + end.h/2;
-			gameArea.drawLine(startx, starty, endx, endy);
+			gameArea.drawLine(startx, starty, endx, endy, "green");
 			gameIsOver = true;
 		}
 		wn = stack4.hasWon(2);
@@ -58,7 +62,7 @@ function localGame() {
 			let end = stack4.getRect(wn[3], wn[4]);
 			let endx = end.x + end.w/2;
 			let endy = end.y + end.h/2;
-			gameArea.drawLine(startx, starty, endx, endy);
+			gameArea.drawLine(startx, starty, endx, endy, "green");
 			gameIsOver = true;
 		}
 
@@ -69,17 +73,17 @@ function localGame() {
 }
 
 var gameArea = {
-	canvas: document.body.getElementsByTagName("canvas")[0],
+	canvas: document.getElementById("game"),
 	start: function() {
 		this.context = this.canvas.getContext("2d");
 	},
 	clear: function() {
 		this.context.clearRect(0,0,this.canvas.width,this.canvas.height);
 	},
-	drawLine: function(x1, y1, x2, y2) {
+	drawLine: function(x1, y1, x2, y2, color) {
 		let ctx = this.context;
-		ctx.strokeStyle= "green";
-		ctx.fillStyle = "green";
+		ctx.strokeStyle= color;
+		ctx.fillStyle = color;
 		ctx.beginPath();
 		ctx.moveTo(x1,y1);
 		ctx.lineTo(x2,y2);

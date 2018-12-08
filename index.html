@@ -2,12 +2,40 @@
 
 <html>
 <head>
+	<link rel="stylesheet" type="text/css" href="style.css">
 	<title>test</title>
 </head>
-<body onload="localGame()">
-	<canvas width="480" height="480">
-	<script src="game.js"></script>
-	</canvas>
+<body>
+	<div id="top-row"></div>
+	<script type="text/javascript">
+		var letters = "12345678";
+		var div = document.getElementById("top-row");
+		for (let i = 0; i < 8; ++i) {
+			var nw = document.createElement("div");
+			nw.setAttribute("style", "width: 60px; height: 60px; display: inline-block;")
+			let html = '<p style="text-align: center; font-size: 20px;">' + letters[i] + '</p>';
+			nw.innerHTML = html;
+			div.appendChild(nw);
+		}
+	</script>
+
+	<div id="left-row"></div>
+	<script type="text/javascript">
+		var letters = "ABCDEFGH";
+		var div = document.getElementById("left-row");
+		for (let i = 0; i < 8; ++i) {
+			console.log(i);
+			var nw = document.createElement("div");
+			nw.setAttribute("style", "width: 60px; height: 60px; display: inline-block;")
+			let html = '<p style="text-align: center; font-size: 20px;">' + letters[i] + '</p>';
+			nw.innerHTML = html;
+			div.appendChild(nw);
+		}
+	</script>
+
+	<canvas id="game" width="480" height="480"></canvas>
+	<script src="game.js" onload="localGame()"></script>
+
 	<img src="kryss.png" width="40" height="40">
 </body>
 
