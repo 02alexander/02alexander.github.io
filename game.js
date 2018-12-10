@@ -16,7 +16,7 @@ function localGame() {
 	stack4x4.renderBoard();
 	stack4x4.highlightAccecpableMoves();
 
-	startTimer();
+	updateTimer();
 
 	console.log(gameArea.canvas.width);
 	console.log(gameArea.canvas.height);
@@ -34,6 +34,7 @@ function localGame() {
 		let boardCordx = Math.floor(x / (gameArea.canvas.width/8));
 		let boardCordy = Math.floor(y / (gameArea.canvas.height/8));
 
+		console.log()
 		console.log(boardCordx + ", " + boardCordy)
 		if (boardCordx >= 8 || boardCordx < 0 || boardCordy >= 8 || boardCordy < 0) {
 			return;

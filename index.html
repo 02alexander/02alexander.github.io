@@ -6,7 +6,6 @@
 	<title>stack 4x4</title>
 </head>
 <body>
-	<script type="text/javascript" src="timer.js"></script>
 	<div id="top-row"></div>
 	<script type="text/javascript">
 		var letters = "12345678";
@@ -34,9 +33,6 @@
 		}
 	</script>
 
-	<canvas id="game" width="480" height="480"></canvas>
-	<script src="game.js" onload="localGame()"></script>
-
 	<img src="kryss.png" width="40" height="40" style="position: fixed; left: 570px; top: 360px">
 
 	<div id="timer" >
@@ -47,6 +43,13 @@
 			<p id="ring-time" style="text-align: center; border: 1px; font-size: 25px;">ring-tid</p>
 		</div>
 	</div>
+
+	<canvas id="game" width="480" height="480"></canvas>
+	<script type="text/javascript" src="timer.js"></script>
+	<script type="text/javascript" src="game.js"></script>
+	<script >
+		localGame();
+	</script>
 
 	<button id="reset-button" onclick="stack4x4.reset(); resetTime()">starta om</button>
 
