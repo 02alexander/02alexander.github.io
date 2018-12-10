@@ -7,6 +7,7 @@ kryss.src = "kryss.png";
 
 var gameIsOver = false;
 
+
 function localGame() {
 	gameArea.start();
 	stack4x4.start();
@@ -15,10 +16,14 @@ function localGame() {
 	stack4x4.renderBoard();
 	stack4x4.highlightAccecpableMoves();
 
+	startTimer();
+
 	console.log(gameArea.canvas.width);
 	console.log(gameArea.canvas.height);
 
 	window.addEventListener('mousedown', function(e) {
+
+		bufferTime = bufferTimeLimit;
 
 		if (gameIsOver) {
 			return;

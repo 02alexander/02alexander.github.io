@@ -6,6 +6,7 @@
 	<title>stack 4x4</title>
 </head>
 <body>
+	<script type="text/javascript" src="timer.js"></script>
 	<div id="top-row"></div>
 	<script type="text/javascript">
 		var letters = "12345678";
@@ -36,7 +37,26 @@
 	<canvas id="game" width="480" height="480"></canvas>
 	<script src="game.js" onload="localGame()"></script>
 
-	<img src="kryss.png" width="40" height="40">
-</body>
+	<img src="kryss.png" width="40" height="40" style="position: fixed; left: 570px; top: 360px">
 
+	<div id="timer" >
+		<div id="kryss-time-div">
+			<p id="kryss-time" style="text-align: center; border: 1px;">krysss-tid</p>
+		</div>
+		<div id="ring-time-div">
+			<p id="ring-time" style="text-align: center; border: 1px;">ring-tid</p>
+		</div>
+	</div>
+
+	<div id="timer-checkbox-div">
+		timer: <input id="check" type="checkbox" onclick="checkBox()">
+
+	</div>
+</body>
 </html>
+
+
+
+
+
+
