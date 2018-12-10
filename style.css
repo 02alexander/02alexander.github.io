@@ -11,7 +11,7 @@
 #timer-checkbox-div {
 	position: fixed;
 	left: 570px;
-	top: 370;
+	top: 230px;
 }
 
 #kryss-time-div {
@@ -46,4 +46,10 @@
 	left: 0px;
 	width: 60px;
 	height: 480px;
+}
+
+#reset-button {
+	position: fixed;
+	left: 570px;
+	top: 270px;
 }

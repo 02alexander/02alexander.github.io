@@ -1,6 +1,8 @@
 
-var kryssTimeLeft = 30;
-var ringTimeLeft = 30;
+var kryssTimeLimit = 30;
+var ringTimeLimit = 30;
+var kryssTimeLeft = kryssTimeLimit;
+var ringTimeLeft = ringTimeLimit;
 var bufferTimeLimit = 3;
 var bufferTime = bufferTimeLimit;
 
@@ -59,3 +61,11 @@ setInterval(function() {
 		}
 	}
 }, 10);
+
+function resetTime() {
+	kryssTimeLeft = kryssTimeLimit;
+	ringTimeLeft = ringTimeLimit;
+	bufferTime = bufferTimeLimit;
+	pauseTimer();
+	updateTimer();
+}

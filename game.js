@@ -23,8 +23,6 @@ function localGame() {
 
 	window.addEventListener('mousedown', function(e) {
 
-		bufferTime = bufferTimeLimit;
-
 		if (gameIsOver) {
 			return;
 		}
@@ -35,9 +33,15 @@ function localGame() {
 		console.log(x + ", " + y)
 		let boardCordx = Math.floor(x / (gameArea.canvas.width/8));
 		let boardCordy = Math.floor(y / (gameArea.canvas.height/8));
-		console.log(boardCordx);
-		console.log(boardCordy);
-		console.log("\n");
+
+		console.log(boardCordx + ", " + boardCordy)
+		if (boardCordx >= 8 || boardCordx < 0 || boardCordy >= 8 || boardCordy < 0) {
+			return;
+		}
+		
+		startTimer();
+		bufferTime = bufferTimeLimit;
+
 		stack4x4.placePiece(boardCordx,boardCordy);
 		stack4x4.renderBoard();
 		let wn = stack4x4.hasWon(1);
@@ -232,6 +236,21 @@ var stack4x4 = {
 			}
 		}
 		return [winningLines[0].length!=0, winningLines[0], winningLines[1]];
+	},
+	reset: function() {
+		for (let i = 0; i < 8; ++i) {
+			for (let j = 0; j < 8; ++j) {
+				this.board[i][j] = 0;
+			}
+		}
+		gameArea.context.clearRect(0, 0, gameArea.canvas.width, gameArea.canvas.height);
+		this.whoseTurn = 2;
+		this.showWhoseTurn();
+		this.renderLines();
+		this.renderBoard();
+		this.highlightAccecpableMoves();
+		gameIsOver = false;
+
 	}
 }
 
