@@ -53,3 +53,9 @@
 	left: 570px;
 	top: 270px;
 }
+
+#timer-set-form {
+	position: fixed;
+	top: 420px;
+	left: 670px;
+}

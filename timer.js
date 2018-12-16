@@ -1,20 +1,38 @@
 
-var kryssTimeLimit = 30;
-var ringTimeLimit = 30;
-var kryssTimeLeft = kryssTimeLimit;
-var ringTimeLeft = ringTimeLimit;
+var timeLimit = 30;
+var kryssTimeLeft = timeLimit;
+var ringTimeLeft = timeLimit;
 var bufferTimeLimit = 3;
 var bufferTime = bufferTimeLimit;
 
 var isPaused = true;
 
+function submitButton() {
+	let seconds = parseInt(document.getElementById("seconds").value);
+	document.getElementById("seconds").value = "";
+	if (!Number.isNaN(seconds)) {
+		timeLimit = seconds;
+	} 
+	let buffer = parseInt(document.getElementById("buffer").value);
+	document.getElementById("buffer").value = "";
+	if (!Number.isNaN(buffer)) {
+		bufferTimeLimit = buffer;
+	}
+	console.log(timeLimit);
+	console.log(bufferTimeLimit);
+	resetTime();
+}
+
 function checkBox() {
 	let check = document.getElementById("check");
 	let timer = document.getElementById("timer");
+	let input = document.getElementById("timer-set-form");
 	if (check.checked == true) {
 		timer.style.display = "block";
+		input.style.display = "block";
 	} else {
 		timer.style.display = "none";
+		input.style.display = "none";
 	}
 }
 
@@ -63,8 +81,8 @@ setInterval(function() {
 }, 10);
 
 function resetTime() {
-	kryssTimeLeft = kryssTimeLimit;
-	ringTimeLeft = ringTimeLimit;
+	kryssTimeLeft = timeLimit;
+	ringTimeLeft = timeLimit;
 	bufferTime = bufferTimeLimit;
 	pauseTimer();
 	updateTimer();

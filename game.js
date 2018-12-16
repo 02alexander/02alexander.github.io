@@ -40,6 +40,10 @@ function localGame() {
 			return;
 		}
 		
+		if (stack4x4.board[boardCordx][boardCordy] != 0) {
+			return;
+		}
+
 		startTimer();
 		bufferTime = bufferTimeLimit;
 
